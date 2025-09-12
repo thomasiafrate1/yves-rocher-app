@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "yves-rocher-app",
-    "slug": "yves-rocher-app",
+    "name": "QuestionnaireApp",
+    "slug": "QuestionnaireApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "yvesrocherapp",
+    "scheme": "questionnaireapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
