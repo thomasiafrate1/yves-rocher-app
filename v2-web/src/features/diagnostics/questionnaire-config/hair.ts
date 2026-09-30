@@ -10,8 +10,8 @@ export const hairDiagnosticConfig: DiagnosticConfig = {
     "Quelques questions pour identifier l'etat des cheveux, le confort du cuir chevelu et les gestes qui influencent la routine.",
   resultTitle: "Votre profil cheveux",
   visual: {
-    image: "/images/products/huile_recuperatrice_eclat_nuit_01.png",
-    alt: "Texture huile de soin",
+    image: "/images/products/yr-98076.jpg",
+    alt: "Shampooing Définissant Yves Rocher",
   },
   profiles: [
     {

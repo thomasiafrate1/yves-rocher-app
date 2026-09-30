@@ -1,8 +1,7 @@
+import { hairFragranceProducts } from "./hair-fragrance";
 import type { Product } from "@/features/diagnostics/types";
 
 // Catalogue local V2. Les produits visage reutilisent les assets de la V1.
-// TEMPORARY_DEMO: les produits cheveux/parfum reutilisent des visuels locaux en attendant
-// un catalogue valide metier et des packshots dedies.
 export const productsCatalog: Product[] = [
   {
     id: "face-hydration-care",
@@ -100,121 +99,5 @@ export const productsCatalog: Product[] = [
     besoinsCibles: ["anti_age", "nutrition", "comfort"],
     priorite: 84,
   },
-  {
-    id: "hair-nutrition-mask-demo",
-    nom: "Masque Nutrition Intense",
-    description:
-      "Produit de demonstration pour les longueurs seches en attente du catalogue capillaire valide.",
-    univers: "hair",
-    categorie: "Masque cheveux",
-    image: "/images/products/creme_douceur_visage_&_corps_la_gacilly_01.png",
-    profilsCompatibles: ["dry_hair", "curly_hair"],
-    besoinsCibles: ["nutrition", "shine", "softness", "curls", "anti_frizz"],
-    priorite: 90,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "hair-light-shampoo-demo",
-    nom: "Shampoing Fraicheur Legere",
-    description:
-      "Produit de demonstration pour aider a retrouver de la legerete aux racines.",
-    univers: "hair",
-    categorie: "Shampoing",
-    image: "/images/products/gel_nettoyant_purifiant_pure_menthe_01.png",
-    profilsCompatibles: ["oily_roots"],
-    besoinsCibles: ["freshness", "balance", "volume"],
-    priorite: 94,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "hair-repair-serum-demo",
-    nom: "Serum Reparation Longueurs",
-    description:
-      "Produit de demonstration pour accompagner les cheveux fragilises et ternes.",
-    univers: "hair",
-    categorie: "Serum cheveux",
-    image: "/images/products/concentre_bi_phase_recuperateur_01.png",
-    profilsCompatibles: ["damaged_hair", "dry_hair"],
-    besoinsCibles: ["repair", "strength", "heat_protection", "breakage", "shine"],
-    priorite: 96,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "hair-scalp-comfort-demo",
-    nom: "Soin Douceur Cuir Chevelu",
-    description:
-      "Produit de demonstration pour une routine douce en cas d'inconfort du cuir chevelu.",
-    univers: "hair",
-    categorie: "Soin cuir chevelu",
-    image: "/images/products/eau_micellaire_lactee_apaisante_01.png",
-    profilsCompatibles: ["sensitive_scalp"],
-    besoinsCibles: ["scalp_comfort", "sensitivity", "comfort"],
-    priorite: 92,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "fragrance-fresh-demo",
-    nom: "Eau Fraiche Citrus",
-    description:
-      "Produit de demonstration pour les profils frais, petillants et lumineux.",
-    univers: "fragrance",
-    categorie: "Eau de parfum",
-    image: "/images/products/mousse_lactee_nettoyante_illuminatrice_01.png",
-    profilsCompatibles: ["fresh"],
-    besoinsCibles: ["freshness", "citrus", "light"],
-    priorite: 96,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "fragrance-floral-demo",
-    nom: "Eau Florale Delicate",
-    description:
-      "Produit de demonstration pour les envies florales, douces et faciles a porter.",
-    univers: "fragrance",
-    categorie: "Eau de parfum",
-    image: "/images/products/contour_des_yeux_illuminateur_anti_cernes_01.png",
-    profilsCompatibles: ["floral"],
-    besoinsCibles: ["floral", "rose", "magnolia", "softness"],
-    priorite: 94,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "fragrance-woody-demo",
-    nom: "Eau Boisee Chaleureuse",
-    description:
-      "Produit de demonstration pour les sillages presents, boises et enveloppants.",
-    univers: "fragrance",
-    categorie: "Eau de parfum",
-    image: "/images/products/grand_soin_regenerant_01.png",
-    profilsCompatibles: ["woody"],
-    besoinsCibles: ["woody", "patchouli", "intensity", "elegance"],
-    priorite: 92,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "fragrance-gourmand-demo",
-    nom: "Eau Gourmande Confort",
-    description:
-      "Produit de demonstration pour les facettes douces, cocon et reconfortantes.",
-    univers: "fragrance",
-    categorie: "Eau de parfum",
-    image: "/images/products/bb_creme_sublimatrice_6_en_1.png",
-    profilsCompatibles: ["amber_gourmand"],
-    besoinsCibles: ["amber", "vanilla", "gourmand", "comfort", "intensity"],
-    priorite: 90,
-    isTemporaryDemo: true,
-  },
-  {
-    id: "fragrance-fruity-demo",
-    nom: "Eau Fruitee Peche",
-    description:
-      "Produit de demonstration pour les envies fruitees, lumineuses et petillantes.",
-    univers: "fragrance",
-    categorie: "Eau de parfum",
-    image: "/images/products/creme_correctrice_sublimatrice_01.png",
-    profilsCompatibles: ["fruity"],
-    besoinsCibles: ["fruity", "peach", "sparkle", "freshness"],
-    priorite: 88,
-    isTemporaryDemo: true,
-  },
+  ...hairFragranceProducts,
 ];

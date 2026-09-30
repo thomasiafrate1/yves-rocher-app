@@ -52,24 +52,12 @@ export default async function DiagnosticIntroPage({ params }: PageProps<"/diagno
             </p>
           ) : null}
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="mt-10">
             <Link
-              href={`/diagnostic/${config.id}/questionnaire?mode=self`}
-              className="rounded-[1.5rem] bg-[#314b2c] p-7 text-[#fff8e8] shadow-[0_14px_34px_rgba(47,74,45,0.22)] transition hover:bg-[#24391f]"
+              href={`/diagnostic/${config.id}/questionnaire`}
+              className="inline-flex rounded-full bg-[#314b2c] px-8 py-4 text-lg font-semibold text-[#fff8e8] shadow-[0_14px_34px_rgba(47,74,45,0.22)] transition hover:bg-[#24391f]"
             >
-              <span className="block text-sm font-semibold uppercase tracking-[0.22em] opacity-80">
-                Mode autonome
-              </span>
-              <span className="mt-4 block text-2xl font-semibold">Cliente seule</span>
-            </Link>
-            <Link
-              href={`/diagnostic/${config.id}/questionnaire?mode=advisor`}
-              className="rounded-[1.5rem] border border-[#d8c9b1] bg-white/70 p-7 text-[#263420] transition hover:border-[#8ea06e] hover:bg-[#fbf5e9]"
-            >
-              <span className="block text-sm font-semibold uppercase tracking-[0.22em] text-[#8b6f45]">
-                Mode accompagne
-              </span>
-              <span className="mt-4 block text-2xl font-semibold">Avec conseillere</span>
+              Commencer mon diagnostic
             </Link>
           </div>
         </div>

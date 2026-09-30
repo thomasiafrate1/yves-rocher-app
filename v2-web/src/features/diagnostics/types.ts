@@ -76,6 +76,20 @@ export type Product = {
   besoinsCibles: string[];
   priorite: number;
   isTemporaryDemo?: boolean;
+  reference?: string;
+  size?: string;
+  priceEur?: number;
+  priceCheckedAt?: string;
+  sourceUrl?: string;
+  usageAdvice?: string;
+  precautions?: string;
+  olfactoryNotes?: string[];
+  secondaryMatchTags?: string[];
+  routine?: {
+    slot: "scalp" | "shampoo" | "rinse" | "leave-in";
+    order: number;
+    label: string;
+  };
 };
 
 export type RankedProduct = {

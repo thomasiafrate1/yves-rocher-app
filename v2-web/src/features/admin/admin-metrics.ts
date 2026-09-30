@@ -1,4 +1,5 @@
 import { DIAGNOSTIC_LABELS, getNeedLabel } from "@/features/diagnostics/labels";
+import { legacyProductNames } from "@/features/products/legacy-names";
 import { productsCatalog } from "@/features/products/catalog";
 import type {
   AdminAnalyticsData,
@@ -10,7 +11,7 @@ export type CountItem = {
 };
 
 function productName(productId: string) {
-  return productsCatalog.find((product) => product.id === productId)?.nom ?? productId;
+  return productsCatalog.find((product) => product.id === productId)?.nom ?? legacyProductNames[productId] ?? productId;
 }
 
 function countBy(values: string[]): CountItem[] {

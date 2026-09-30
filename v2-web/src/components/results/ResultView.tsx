@@ -17,6 +17,9 @@ type ResultViewProps = {
 
 export function ResultView({ config, result, recommendations, mode }: ResultViewProps) {
   const topNeeds = result.secondaryNeeds.slice(0, 4);
+  const priceDates = [...new Set(recommendations.flatMap(({ product }) =>
+    product.priceCheckedAt ? [product.priceCheckedAt] : [],
+  ))].sort().map((date) => date.split("-").reverse().join("/"));
 
   return (
     <main className="min-h-screen bg-[#f7f1e7] px-5 py-5 text-[#263420] sm:px-8 lg:px-12">
@@ -67,34 +70,62 @@ export function ResultView({ config, result, recommendations, mode }: ResultView
 
           <div className="mt-10">
             <h2 className="text-2xl font-semibold text-[#24351f]">
-              Recommandations produits
+              {config.id === "hair" ? "Votre routine, dans l’ordre" : config.id === "fragrance" ? "Vos parfums à découvrir" : "Recommandations produits"}
             </h2>
+            {config.id === "hair" ? (
+              <p className="mt-2 text-sm leading-6 text-[#6e695f]">Une sélection de gestes à adapter à votre routine. Le masque et l’après-shampooing sont proposés comme alternatives.</p>
+            ) : null}
+            {recommendations.some(({ product }) => product.priceEur !== undefined) ? (
+              <p className="mt-2 text-sm leading-6 text-[#6e695f]">Prix web indicatifs{priceDates.length ? ` — relevés du ${priceDates.join(", ")}` : ""}. Les prix et offres en boutique peuvent différer.</p>
+            ) : null}
             <div className="mt-5 grid gap-4">
-              {recommendations.map(({ product, reasons }) => (
+              {recommendations.map(({ product, reasons }, index) => (
                 <article
                   key={product.id}
-                  className="grid grid-cols-[104px_1fr] gap-5 rounded-[1.5rem] border border-[#e3d7c4] bg-white/70 p-4 sm:grid-cols-[132px_1fr] sm:p-5"
+                  className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 rounded-[1.5rem] border border-[#e3d7c4] bg-white/70 p-4 sm:grid-cols-[132px_minmax(0,1fr)] sm:p-5"
                 >
-                  <div className="relative aspect-square overflow-hidden rounded-[1.1rem] bg-[#f1eadb]">
+                  <div className="relative aspect-square overflow-hidden rounded-[1.1rem] bg-white">
                     <Image
                       src={product.image}
                       alt={product.nom}
                       fill
-                      sizes="132px"
-                      className="object-contain p-4"
+                      sizes="(max-width: 639px) 72px, 132px"
+                      className="object-contain p-2"
                     />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8b6f45]">
-                      {product.categorie}
+                      {product.routine ? `${index + 1}. ${product.routine.label}` : product.categorie}
                     </p>
-                    <h3 className="mt-2 text-xl font-semibold leading-tight text-[#24351f]">
+                    <h3 className="mt-2 text-base font-semibold leading-tight text-[#24351f] sm:text-xl">
                       {product.nom}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#6e695f]">{product.description}</p>
+                    {product.size ? <p className="mt-2 text-sm text-[#6e695f]">{product.size} · Réf. {product.reference}</p> : null}
+                    {product.priceEur !== undefined ? (
+                      <p className="mt-2 text-sm font-semibold text-[#24351f]">
+                        {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(product.priceEur)}
+                        <span className="font-normal text-[#6e695f]"> · prix web indicatif</span>
+                      </p>
+                    ) : null}
+                  </div>
+                  <div className="col-span-2 min-w-0">
+                    <p className="text-sm leading-6 text-[#6e695f]">{product.description}</p>
+                    {product.olfactoryNotes ? <p className="mt-2 text-sm text-[#6e695f]">Notes : {product.olfactoryNotes.join(" · ")}</p> : null}
                     <p className="mt-3 text-sm font-semibold text-[#53613f]">
                       {reasons.join(" | ")}
                     </p>
+                    {product.usageAdvice ? (
+                      <div className="mt-3 rounded-xl bg-[#f7f1e7] p-3 text-sm leading-6 text-[#53613f]">
+                        <p className="font-semibold">{product.univers === "fragrance" ? "Pour le découvrir" : "Conseil d’utilisation"}</p>
+                        <p>{product.usageAdvice}</p>
+                      </div>
+                    ) : null}
+                    {product.precautions ? (
+                      <details className="mt-3 text-sm leading-6 text-[#6e695f]">
+                        <summary className="cursor-pointer py-2">Précautions d’utilisation</summary>
+                        <p>{product.precautions}</p>
+                      </details>
+                    ) : null}
                   </div>
                 </article>
               ))}
@@ -103,7 +134,7 @@ export function ResultView({ config, result, recommendations, mode }: ResultView
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
-              href={`/diagnostic/${config.id}/questionnaire?mode=${mode}`}
+              href={`/diagnostic/${config.id}/questionnaire`}
               className="rounded-full bg-[#314b2c] px-8 py-4 text-center text-sm font-semibold uppercase tracking-[0.18em] text-[#fff8e8] shadow-[0_14px_34px_rgba(47,74,45,0.22)] transition hover:bg-[#24391f]"
             >
               Recommencer

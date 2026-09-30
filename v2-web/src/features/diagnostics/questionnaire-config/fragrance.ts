@@ -10,8 +10,8 @@ export const fragranceDiagnosticConfig: DiagnosticConfig = {
     "Quelques questions pour rapprocher vos envies olfactives d'une famille de parfum, d'une intensite et d'un contexte de port.",
   resultTitle: "Votre profil parfum",
   visual: {
-    image: "/images/products/serum_activateur_eclat_01.png",
-    alt: "Flacon de parfum",
+    image: "/images/products/yr-90154.jpg",
+    alt: "Eau de Parfum Sel d’Azur Yves Rocher",
   },
   profiles: [
     {

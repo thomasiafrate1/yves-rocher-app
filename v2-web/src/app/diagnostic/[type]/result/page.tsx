@@ -4,7 +4,6 @@ import { PersistDiagnosticResult } from "@/components/results/PersistDiagnosticR
 import { ResultView } from "@/components/results/ResultView";
 import {
   isDiagnosticComplete,
-  normalizeUsageMode,
   parseAnswersParam,
 } from "@/features/diagnostics/answers";
 import { getDiagnosticConfig } from "@/features/diagnostics/questionnaire-config";
@@ -23,7 +22,7 @@ export default async function ResultPage({
   }
 
   const answers = parseAnswersParam(search.answers);
-  const mode = normalizeUsageMode(search.mode);
+  const mode = "self";
   const diagnosticId =
     typeof search.diagnosticId === "string" ? search.diagnosticId : undefined;
   const diagnosticToken =
@@ -43,7 +42,7 @@ export default async function ResultPage({
             Relancez le diagnostic pour obtenir un profil et des recommandations coherentes.
           </p>
           <Link
-            href={`/diagnostic/${config.id}/questionnaire?mode=${mode}`}
+            href={`/diagnostic/${config.id}/questionnaire`}
             className="mt-8 inline-flex rounded-full bg-[#314b2c] px-8 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#fff8e8]"
           >
             Recommencer

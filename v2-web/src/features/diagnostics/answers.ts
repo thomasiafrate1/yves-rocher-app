@@ -1,4 +1,4 @@
-import type { DiagnosticConfig, SelectedAnswers, UsageMode } from "./types";
+import type { DiagnosticConfig, SelectedAnswers } from "./types";
 
 export function parseAnswersParam(value: string | string[] | undefined): SelectedAnswers {
   if (!value || Array.isArray(value)) {
@@ -24,8 +24,4 @@ export function parseAnswersParam(value: string | string[] | undefined): Selecte
 
 export function isDiagnosticComplete(config: DiagnosticConfig, answers: SelectedAnswers) {
   return config.questions.every((question) => Boolean(answers[question.id]));
-}
-
-export function normalizeUsageMode(value: string | string[] | undefined): UsageMode {
-  return value === "advisor" ? "advisor" : "self";
 }

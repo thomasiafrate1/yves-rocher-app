@@ -70,7 +70,6 @@ export function QuestionnaireFlow({ config, diagnosticType, mode }: Questionnair
 
     const params = new URLSearchParams({
       answers: JSON.stringify(answers),
-      mode,
     });
 
     if (diagnosticSession) {

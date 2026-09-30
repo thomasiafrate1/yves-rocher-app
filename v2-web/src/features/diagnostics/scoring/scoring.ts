@@ -89,7 +89,11 @@ function buildReasons(product: Product, result: DiagnosticResult) {
   );
 
   if (product.profilsCompatibles.includes(result.profile.id)) {
-    reasons.push(`Adapte au profil ${result.profile.shortName.toLowerCase()}`);
+    reasons.push(
+      product.univers === "fragrance" && result.profile.id === "woody"
+        ? "Une piste autour du patchouli pour votre envie boisée"
+        : `Adapte au profil ${result.profile.shortName.toLowerCase()}`,
+    );
   }
 
   if (matchingNeeds.length > 0) {
@@ -109,8 +113,14 @@ export function rankProducts(
   result: DiagnosticResult,
   limit = 4,
 ): RankedProduct[] {
-  return products
+  const rankedProducts = products
     .filter((product) => product.univers === config.id)
+    .filter((product) =>
+      config.id === "face" || product.profilsCompatibles.includes(result.profile.id) ||
+      (config.id === "hair" && product.secondaryMatchTags?.some((tag) =>
+        result.recommendationTags.includes(tag),
+      )),
+    )
     .map((product) => {
       const profileMatch = product.profilsCompatibles.includes(result.profile.id) ? 10 : 0;
       const needMatchCount = product.besoinsCibles.filter((need) =>
@@ -126,8 +136,22 @@ export function rankProducts(
       };
     })
     .filter((ranked) => ranked.score > 0)
-    .sort((a, b) => b.score - a.score || b.product.priorite - a.product.priorite)
-    .slice(0, limit);
+    .sort((a, b) => b.score - a.score || b.product.priorite - a.product.priorite);
+
+  if (config.id === "hair") {
+    // Une seule proposition par geste : pas deux shampooings ou deux soins à rincer.
+    const slots = new Set<string>();
+    return rankedProducts.filter(({ product }) => {
+      const slot = product.routine?.slot ?? product.id;
+      if (slots.has(slot)) return false;
+      slots.add(slot);
+      return true;
+    }).slice(0, limit).sort((a, b) =>
+      (a.product.routine?.order ?? 99) - (b.product.routine?.order ?? 99),
+    );
+  }
+
+  return rankedProducts.slice(0, config.id === "fragrance" ? Math.min(limit, 2) : limit);
 }
 
 export function evaluateDiagnostic(

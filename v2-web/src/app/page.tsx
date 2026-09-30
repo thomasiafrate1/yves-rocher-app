@@ -35,8 +35,7 @@ export default function Home() {
             </div>
             <p className="max-w-2xl text-xl leading-9 text-[#5f5a51] lg:justify-self-end">
               Choisissez un parcours, repondez a quelques questions et obtenez un profil avec des
-              recommandations produits. L&apos;interface est pensee pour une cliente en autonomie ou
-              accompagnee par une conseillere.
+              recommandations produits. Découvrez votre routine beauté en quelques étapes, à votre rythme.
             </p>
           </div>
 
